@@ -6,13 +6,15 @@ Terraform module to proviosion VPC network.
 
 ```hcl
 module "label" {
-  source    = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.24.1"
+  source  = "cloudposse/label/null"
+  version = "0.24.1"
+
   namespace = "sweetops"
   stage     = "production"
   name      = "aweasome"
 }
 
-module "your_aweasome_role" {
+module "your_aweasome_vpc" {
   source = "git::https://github.com/SweetOps/terraform-google-network.git?ref=master"
 
   context = module.label.context
@@ -42,7 +44,7 @@ module "your_aweasome_role" {
 | auto\_create\_subnetworks | Wheter to create a subnet for each region automatically across the `10.128.0.0/9`. | `bool` | `false` | no |
 | context | Single object for setting entire context at once.<br>See description of individual variables for details.<br>Leave string and numeric variables as `null` to use default value.<br>Individual variable settings (non-null) override settings in context object,<br>except for attributes, tags, and additional\_tag\_map, which are merged. | `any` | <pre>{<br>  "additional_tag_map": {},<br>  "attributes": [],<br>  "delimiter": null,<br>  "enabled": true,<br>  "environment": null,<br>  "id_length_limit": null,<br>  "label_key_case": null,<br>  "label_order": [],<br>  "label_value_case": null,<br>  "name": null,<br>  "namespace": null,<br>  "regex_replace_chars": null,<br>  "stage": null,<br>  "tags": {}<br>}</pre> | no |
 | delete\_default\_routes\_on\_create | If set to `true`, default routes `(0.0.0.0/0)` will be deleted immediately after network creation. | `bool` | `false` | no |
-| delimiter | Delimiter to be used between `namespace`, `environment`, `stage`, `name` and `attributes`.<br>Defaults to `-` (hyphen). Set to `""` to use no delimiter at all. | `string` | `"_"` | no |
+| delimiter | Delimiter to be used between `namespace`, `environment`, `stage`, `name` and `attributes`.<br>Defaults to `-` (hyphen). Set to `""` to use no delimiter at all. | `string` | `"-"` | no |
 | description | An optional description of this resource. | `string` | `"Managed by Terraform"` | no |
 | enabled | Set to false to prevent the module from creating any resources | `bool` | `null` | no |
 | environment | Environment, e.g. 'uw2', 'us-west-2', OR 'prod', 'staging', 'dev', 'UAT' | `string` | `null` | no |
