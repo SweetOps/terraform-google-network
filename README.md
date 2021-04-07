@@ -1,4 +1,4 @@
-# terraform-google-project-iam-custom-role
+# terraform-google-network
 
 Terraform module to proviosion VPC network.
 
